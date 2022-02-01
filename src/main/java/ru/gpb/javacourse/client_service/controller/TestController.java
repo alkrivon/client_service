@@ -1,10 +1,11 @@
 package ru.gpb.javacourse.client_service.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.gpb.javacourse.client_service.dto.PersonClient;
+import ru.gpb.javacourse.client_service.service.PersonClientService;
 
 /**
  * @author dzahbarov
@@ -13,11 +14,17 @@ import ru.gpb.javacourse.client_service.dto.PersonClient;
 @RestController
 public class TestController {
 
-    @RequestMapping(path = "/createNewPerson", method = RequestMethod.POST)
-    public String createPerson(@RequestParam String firstname, @RequestParam String lastname) {
-        PersonClient personClient = new PersonClient(firstname, lastname);
-        System.out.println("firstname " + personClient.getFirstname() + " lastname " + personClient.getLastname());
-        return "ok";
+    public PersonClientService personClientService;
+
+    @Autowired
+    public TestController(PersonClientService personClientService) {
+        this.personClientService = personClientService;
     }
 
+    @PostMapping("/createNewPerson")
+    public ResponseEntity createPerson(@RequestParam String firstname, @RequestParam String lastname) {
+        PersonClient personClient = personClientService.createPersonClient(firstname, lastname);
+        return new ResponseEntity<>("firstname " + personClient.getFirstname() + " lastname " +
+                personClient.getLastname(), HttpStatus.OK);
+    }
 }
