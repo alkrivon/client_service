@@ -1,29 +1,26 @@
 package ru.gpb.javacourse.client_service.entities;
 
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import ru.gpb.javacourse.client_service.dto.Client;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.math.BigInteger;
 
 @Entity
-@Table(name = "CorporateClients")
-@Data
+@Table(name = "corporate_clients")
 @NoArgsConstructor
+@Getter
+@Setter
 public class CorporateClient extends Client {
 
     @Column
     private String name;
-    @Column
-    private Long inn;
 
-    public CorporateClient(BigInteger idClient, String name, Long inn) {
-        super(idClient);
+    public CorporateClient(Long inn, String name) {
+        super(inn);
         this.name = name;
-        this.inn = inn;
     }
 }

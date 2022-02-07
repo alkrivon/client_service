@@ -1,4 +1,4 @@
-package ru.gpb.javacourse.client_service.dto;
+package ru.gpb.javacourse.client_service.entities;
 
 import lombok.*;
 
@@ -10,7 +10,6 @@ import java.util.List;
  * @author dzahbarov
  */
 
-@AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
 @Getter

@@ -1,13 +1,14 @@
 package ru.gpb.javacourse.client_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
-import ru.gpb.javacourse.client_service.dto.RetailClient;
+import ru.gpb.javacourse.client_service.dto.CorporateClientDto;
+import ru.gpb.javacourse.client_service.dto.RetailClientDto;
+import ru.gpb.javacourse.client_service.entities.CorporateClient;
+import ru.gpb.javacourse.client_service.entities.RetailClient;
+import ru.gpb.javacourse.client_service.service.CorporateClientService;
 import ru.gpb.javacourse.client_service.service.RetailClientService;
-
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 /**
@@ -17,24 +18,35 @@ import java.time.LocalDate;
 @RestController
 public class ClientController {
 
-    public RetailClientService retailClientService;
+    private final RetailClientService retailClientService;
+    private final CorporateClientService corporateClientService;
 
     @Autowired
-    public ClientController(RetailClientService retailClientService) {
+    public ClientController(RetailClientService retailClientService, CorporateClientService corporateClientService) {
         this.retailClientService = retailClientService;
+        this.corporateClientService = corporateClientService;
     }
 
-    @PostMapping("/AddRetailClient")
-    public ResponseEntity addRetailClient(@RequestParam String firstname, @RequestParam String lastname,
-                                          @RequestParam Long passport, @RequestParam LocalDate dateOfBirth,
-                                          @RequestParam BigInteger idClient) {
-
-        retailClientService.addRetailClient(idClient, firstname, lastname, passport, dateOfBirth);
-        return new ResponseEntity<>(HttpStatus.OK);
+    @PostMapping("/addRetailClient")
+    public RetailClient addRetailClient(@RequestBody RetailClientDto retailClient) {
+        return retailClientService.addRetailClient(retailClient);
     }
-    @GetMapping("/GetRetailClientByNameAndBirthDateAndPassport")
-    public ResponseEntity<RetailClient> getRetailClientByNameAndBirthDateAndPassport(@RequestParam String firstname, @RequestParam String lastname,
-                                                                       @RequestParam Long passport, @RequestParam LocalDate dateOfBirth) {
-        return new ResponseEntity<>(retailClientService.getRetailClientByNameAndBirthDateAndPassport(firstname, lastname, passport, dateOfBirth),HttpStatus.OK);
+
+    @GetMapping("/getRetailClientByNameAndBirthDateAndPassport")
+    public RetailClient getRetailClientByNameAndBirthDateAndPassport(@RequestParam String firstname,
+                                                                        @RequestParam String lastname,
+                                                                        @RequestParam  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
+                                                                        @RequestParam Long passport) {
+        return retailClientService.getRetailClientByNameAndBirthDateAndPassport(firstname, lastname, passport, dateOfBirth);
+    }
+
+    @PostMapping("/addCorporateClient")
+    public CorporateClient addRetailClient(@RequestBody CorporateClientDto corporateClient) {
+        return corporateClientService.addCorporateClient(corporateClient);
+    }
+
+    @GetMapping("/getCorporateClientByInn")
+    public CorporateClient getCorporateClientByInn(@RequestParam Long inn) {
+        return corporateClientService.getCorporateClientByInn(inn);
     }
 }
