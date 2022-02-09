@@ -1,10 +1,10 @@
 package ru.gpb.javacourse.client_service.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class CorporateClientDto extends Client {
-
-    String name;
-    Long inn;
+@Getter
+@Setter
+public class CorporateClientDto extends ClientDto {
+    private String name;
 }

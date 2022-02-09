@@ -2,6 +2,7 @@ package ru.gpb.javacourse.client_service.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.gpb.javacourse.client_service.dto.CorporateClientDto;
 import ru.gpb.javacourse.client_service.entities.CorporateClient;
 import ru.gpb.javacourse.client_service.repository.CorporateClientRepository;
 
@@ -24,7 +25,8 @@ public class CorporateClientService {
     }
 
     @Transactional
-    public void addCorporateClient(BigInteger idClient, String name, Long inn) {
-        corporateClientRepository.save(new CorporateClient(idClient, name, inn));
+    public CorporateClient addCorporateClient(CorporateClientDto corporateClientDto) {
+        return corporateClientRepository.save(
+                new CorporateClient(corporateClientDto.getInn(), corporateClientDto.getName()));
     }
 }
