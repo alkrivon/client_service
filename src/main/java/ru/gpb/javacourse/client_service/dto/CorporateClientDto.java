@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CorporateClientDto extends Client {
+public class CorporateClientDto extends ClientDto {
     private String name;
 }

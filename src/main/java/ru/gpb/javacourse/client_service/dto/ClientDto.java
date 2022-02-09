@@ -15,19 +15,12 @@ import java.util.List;
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class Client {
-
-    @Id
-    @GeneratedValue
+public abstract class ClientDto {
     private long id;
-
-    @Transient
     private List<Account> accounts = new LinkedList<>();
-
-    @Column(name = "inn")
     private Long inn;
 
-    public Client(Long inn) {
+    public ClientDto(Long inn) {
         this.inn = inn;
     }
 }

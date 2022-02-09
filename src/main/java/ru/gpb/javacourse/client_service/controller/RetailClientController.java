@@ -16,15 +16,13 @@ import java.time.LocalDate;
  */
 
 @RestController
-public class ClientController {
+public class RetailClientController {
 
     private final RetailClientService retailClientService;
-    private final CorporateClientService corporateClientService;
 
     @Autowired
-    public ClientController(RetailClientService retailClientService, CorporateClientService corporateClientService) {
+    public RetailClientController(RetailClientService retailClientService, CorporateClientService corporateClientService) {
         this.retailClientService = retailClientService;
-        this.corporateClientService = corporateClientService;
     }
 
     @PostMapping("/addRetailClient")
@@ -38,15 +36,5 @@ public class ClientController {
                                                                         @RequestParam  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateOfBirth,
                                                                         @RequestParam Long passport) {
         return retailClientService.getRetailClientByNameAndBirthDateAndPassport(firstname, lastname, passport, dateOfBirth);
-    }
-
-    @PostMapping("/addCorporateClient")
-    public CorporateClient addCorporateClient(@RequestBody CorporateClientDto corporateClient) {
-        return corporateClientService.addCorporateClient(corporateClient);
-    }
-
-    @GetMapping("/getCorporateClientByInn")
-    public CorporateClient getCorporateClientByInn(@RequestParam Long inn) {
-        return corporateClientService.getCorporateClientByInn(inn);
     }
 }

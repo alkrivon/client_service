@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class RetailClientDto extends Client {
+public class RetailClientDto extends ClientDto {
     private String firstname;
     private String lastname;
     private Long passport;
