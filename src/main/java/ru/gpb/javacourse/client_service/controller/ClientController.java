@@ -41,7 +41,7 @@ public class ClientController {
     }
 
     @PostMapping("/addCorporateClient")
-    public CorporateClient addRetailClient(@RequestBody CorporateClientDto corporateClient) {
+    public CorporateClient addCorporateClient(@RequestBody CorporateClientDto corporateClient) {
         return corporateClientService.addCorporateClient(corporateClient);
     }
 
