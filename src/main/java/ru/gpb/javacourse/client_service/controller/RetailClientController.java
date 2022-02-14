@@ -37,4 +37,9 @@ public class RetailClientController {
                                                                         @RequestParam Long passport) {
         return retailClientService.getRetailClientByNameAndBirthDateAndPassport(firstname, lastname, passport, dateOfBirth);
     }
+
+    @GetMapping("/getRetailClientById")
+    public RetailClient getRetailClientById(Long id) {
+        return retailClientService.getRetailClientById(id);
+    }
 }

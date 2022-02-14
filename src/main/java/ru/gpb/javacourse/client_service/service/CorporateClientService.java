@@ -23,6 +23,10 @@ public class CorporateClientService {
     public CorporateClient getCorporateClientByInn(Long inn) {
         return corporateClientRepository.findCorporateClientByInn(inn);
     }
+    @Transactional
+    public CorporateClient getCorporateClientById(Long id) {
+        return corporateClientRepository.findCorporateClientById(id);
+    }
 
     @Transactional
     public CorporateClient addCorporateClient(CorporateClientDto corporateClientDto) {

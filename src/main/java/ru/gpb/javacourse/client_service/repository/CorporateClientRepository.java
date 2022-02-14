@@ -7,4 +7,6 @@ import ru.gpb.javacourse.client_service.entities.CorporateClient;
 @Repository
 public interface CorporateClientRepository extends JpaRepository<CorporateClient, Long> {
     CorporateClient findCorporateClientByInn(Long inn);
+    CorporateClient findCorporateClientById(Long id);
+
 }
