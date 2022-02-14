@@ -21,6 +21,7 @@ public class RetailClientService {
         this.clientRepository = clientRepository;
     }
 
+
     public RetailClient addRetailClient(RetailClientDto retailClient) {
         return clientRepository.save(new RetailClient(retailClient.getInn(),
                 retailClient.getFirstname(),
@@ -31,5 +32,9 @@ public class RetailClientService {
 
     public RetailClient getRetailClientByNameAndBirthDateAndPassport(String firstname, String lastname, Long passport, LocalDate dateOfBirth) {
         return clientRepository.findByFirstnameAndLastnameAndBirthdayAndPassport(firstname, lastname, dateOfBirth, passport);
+    }
+
+    public RetailClient getRetailClientById(Long id) {
+        return clientRepository.findRetailClientById(id);
     }
 }

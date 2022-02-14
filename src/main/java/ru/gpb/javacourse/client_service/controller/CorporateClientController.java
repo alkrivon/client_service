@@ -2,10 +2,7 @@ package ru.gpb.javacourse.client_service.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.gpb.javacourse.client_service.dto.CorporateClientDto;
 import ru.gpb.javacourse.client_service.dto.RetailClientDto;
 import ru.gpb.javacourse.client_service.entities.CorporateClient;
@@ -18,6 +15,7 @@ import java.time.LocalDate;
 /**
  * @author dzahbarov
  */
+@RestController
 public class CorporateClientController {
     private final CorporateClientService corporateClientService;
 
@@ -34,4 +32,10 @@ public class CorporateClientController {
     public CorporateClient getCorporateClientByInn(@RequestParam Long inn) {
         return corporateClientService.getCorporateClientByInn(inn);
     }
+
+    @GetMapping("/getCorporateClientById")
+    public CorporateClient getCorporateClientById(Long id) {
+        return corporateClientService.getCorporateClientById(id);
+    }
+
 }
