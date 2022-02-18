@@ -7,10 +7,12 @@ import ru.gpb.javacourse.client_service.dto.CorporateClientDto;
 import ru.gpb.javacourse.client_service.dto.RetailClientDto;
 import ru.gpb.javacourse.client_service.entities.CorporateClient;
 import ru.gpb.javacourse.client_service.entities.RetailClient;
+import ru.gpb.javacourse.client_service.exceptions.NotFoundException;
 import ru.gpb.javacourse.client_service.service.CorporateClientService;
 import ru.gpb.javacourse.client_service.service.RetailClientService;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author dzahbarov
@@ -29,13 +31,17 @@ public class CorporateClientController {
     }
 
     @GetMapping("/getCorporateClientByInn")
-    public CorporateClient getCorporateClientByInn(@RequestParam Long inn) {
+    public CorporateClient getCorporateClientByInn(@RequestParam Long inn) throws NotFoundException {
         return corporateClientService.getCorporateClientByInn(inn);
     }
 
-    @GetMapping("/getCorporateClientById")
-    public CorporateClient getCorporateClientById(Long id) {
+    @GetMapping("/getCorporateClientById/{id}")
+    public CorporateClient getCorporateClientById(@PathVariable Long id) throws NotFoundException {
         return corporateClientService.getCorporateClientById(id);
     }
 
+    @GetMapping("/getAllCorporateClient")
+    public List<CorporateClient> getAllCorporateClients() {
+        return corporateClientService.getAllCorporateClients();
+    }
 }
