@@ -43,6 +43,7 @@ class CorporateClientControllerTests {
 				new CorporateClient(1L, "Test"));
 
 		mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/getCorporateClientById/1"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.inn").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test"))
 				.andExpect(status().isOk());
 	}
@@ -54,6 +55,7 @@ class CorporateClientControllerTests {
 				new CorporateClient(1L, "Test"));
 
 		mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080/getCorporateClientByInn?inn=1"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.inn").value(1))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Test"))
 				.andExpect(status().isOk());
 	}
@@ -71,6 +73,8 @@ class CorporateClientControllerTests {
 		when(corporateClientController.getAllCorporateClients()).thenReturn(corporateClientListTest);
 
 		mockMvc.perform(MockMvcRequestBuilders.get("http://localhost:8080//getAllCorporateClient"))
+				.andExpect(MockMvcResultMatchers.jsonPath("$[0].inn").value(1))
+				.andExpect(MockMvcResultMatchers.jsonPath("$[1].inn").value(2))
 				.andExpect(MockMvcResultMatchers.jsonPath("$[0].name").value("Test1"))
 				.andExpect(MockMvcResultMatchers.jsonPath("$[1].name").value("Test2"))
 				.andExpect(status().isOk());
