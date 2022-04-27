@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+
+  postgres:
+    image: 'postgres:14.2'
+    container_name: 'postgres'
+    environment:
+      - 'POSTGRES_USER=ivan'
+      - 'POSTGRES_PASSWORD=ivan'
+      - 'POSTGRES_DB=testdb'
+
+  app:
+    build: ./
+    container_name: 'gpb-client'
+    ports:
+      - 8080:8080
